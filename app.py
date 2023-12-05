@@ -1,8 +1,8 @@
 from flask import Flask, render_template, request, jsonify
 # from keras.preprocessing import image
 from werkzeug.utils import secure_filename
-from werkzeug.utils import send_from_directory
-import cv2 as cv
+#from werkzeug.utils import send_from_directory
+#import cv2 as cv
 import tensorflow as tf
 # import keras.utils as image
 import numpy as np
@@ -26,6 +26,10 @@ app.config['UPLOAD_FOLDER'] = 'uploaded/'
 @app.route('/')
 def upload_f():
 	return render_template('index.php')
+
+@app.route('/test')
+def test():
+    return jsonify('test')
 
 def finds(filename):
 	images = []
@@ -64,5 +68,9 @@ def upload_file():
 		os.remove(os.path.join(app.config['UPLOAD_FOLDER'], secure_filename(f.filename)))
 		# return render_template('result.php', ss = val)
 		return jsonify(val)
+
+def test():
+    return jsonify('test function')
+
 if __name__ == '__main__':
 	app.run()
